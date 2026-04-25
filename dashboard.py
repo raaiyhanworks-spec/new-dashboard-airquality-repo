@@ -17,7 +17,7 @@ df = load_data()
 # =====================================
 # SIDEBAR
 # =====================================
-st.sidebar.title("📊 Air Quality Dashboard")
+st.sidebar.title("Air Quality Dashboard")
 
 stations = st.sidebar.multiselect(
     "Pilih Station:",
@@ -30,13 +30,13 @@ df_filtered = df[df['station'].isin(stations)]
 # =====================================
 # TITLE
 # =====================================
-st.title("🌍 Air Quality Analysis Dashboard")
+st.title("Air Quality Analysis Dashboard")
 st.markdown("Analisis PM2.5 di 12 Stasiun (2013–2017)")
 
 # =====================================
 # 1. OVERVIEW
 # =====================================
-st.subheader("📌 Data Overview")
+st.subheader("Data Overview")
 col1, col2, col3 = st.columns(3)
 
 col1.metric("Total Data", len(df_filtered))
@@ -46,7 +46,7 @@ col3.metric("Rata-rata PM2.5", round(df_filtered['PM2.5'].mean(),2))
 # =====================================
 # 2. PM2.5 PER STATION
 # =====================================
-st.subheader("📊 Rata-rata PM2.5 per Station")
+st.subheader("Rata-rata PM2.5 per Station")
 
 station_pm25 = df_filtered.groupby('station')['PM2.5'].mean().sort_values()
 
@@ -58,7 +58,7 @@ st.pyplot(fig)
 # =====================================
 # 3. TREND WAKTU
 # =====================================
-st.subheader("📈 Trend PM2.5 Over Time")
+st.subheader("Trend PM2.5 Over Time")
 
 time_series = df_filtered.groupby('datetime')['PM2.5'].mean()
 
@@ -69,7 +69,7 @@ st.pyplot(fig)
 # =====================================
 # 4. POLA BULANAN
 # =====================================
-st.subheader("📅 Pola Bulanan PM2.5")
+st.subheader("Pola Bulanan PM2.5")
 
 monthly = df_filtered.groupby('month')['PM2.5'].mean()
 
@@ -80,7 +80,7 @@ st.pyplot(fig)
 # =====================================
 # 5. POLA JAM
 # =====================================
-st.subheader("🕒 Pola PM2.5 per Jam")
+st.subheader("Pola PM2.5 per Jam")
 
 hourly = df_filtered.groupby('hour')['PM2.5'].mean()
 
@@ -91,7 +91,7 @@ st.pyplot(fig)
 # =====================================
 # 6. HEATMAP
 # =====================================
-st.subheader("🔥 Heatmap PM2.5 (Bulan vs Jam)")
+st.subheader("Heatmap PM2.5 (Bulan vs Jam)")
 
 pivot = df_filtered.pivot_table(values='PM2.5', index='month', columns='hour')
 
@@ -102,7 +102,7 @@ st.pyplot(fig)
 # =====================================
 # 7. KORELASI
 # =====================================
-st.subheader("🌪️ Korelasi Faktor Lingkungan")
+st.subheader("Korelasi Faktor Lingkungan")
 
 corr = df_filtered[['PM2.5','TEMP','PRES','DEWP','RAIN','WSPM']].corr()
 
@@ -113,7 +113,7 @@ st.pyplot(fig)
 # =====================================
 # 8. CLUSTERING
 # =====================================
-st.subheader("🧠 Clustering Station")
+st.subheader("Clustering Station")
 
 from sklearn.cluster import KMeans
 
